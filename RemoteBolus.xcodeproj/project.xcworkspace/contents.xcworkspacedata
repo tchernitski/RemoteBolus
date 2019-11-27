@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../SwiftPusher">
+   </FileRef>
+   <Group
+      location = "group:../SwiftPusher"
+      name = "SwiftPusher">
+      <FileRef
+         location = "group:PusherNotification.swift">
+      </FileRef>
+      <FileRef
+         location = "group:String++.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Info-iOS.plist">
+      </FileRef>
+      <FileRef
+         location = "group:Info-macOS.plist">
+      </FileRef>
+      <FileRef
+         location = "group:SwiftPusher.h">
+      </FileRef>
+      <FileRef
+         location = "group:SSLConnection.swift">
+      </FileRef>
+      <FileRef
+         location = "group:Types.swift">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "self:">
+   </FileRef>
+</Workspace>

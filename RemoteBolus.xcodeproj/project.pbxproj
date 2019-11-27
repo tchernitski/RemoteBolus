@@ -1,0 +1,638 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		85855BC722537AD100095E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC622537AD100095E9B /* AppDelegate.swift */; };
+		85855BC922537AD100095E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC822537AD100095E9B /* ViewController.swift */; };
+		85855BCC22537AD100095E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCA22537AD100095E9B /* Main.storyboard */; };
+		85855BCE22537AD300095E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCD22537AD300095E9B /* Assets.xcassets */; };
+		85855BD122537AD300095E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCF22537AD300095E9B /* LaunchScreen.storyboard */; };
+		85855BDC22537AD300095E9B /* RemoteBolusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BDB22537AD300095E9B /* RemoteBolusTests.swift */; };
+		85855BE722537AD300095E9B /* RemoteBolusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BE622537AD300095E9B /* RemoteBolusUITests.swift */; };
+		85855BF522537BF600095E9B /* RemoteConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BF422537BF600095E9B /* RemoteConnectionManager.swift */; };
+		85E6FFF6238D0EA400002B1F /* Cert in Resources */ = {isa = PBXBuildFile; fileRef = 85E6FFF5238D0EA400002B1F /* Cert */; };
+		85E6FFFC238D34A200002B1F /* OpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; };
+		85E6FFFD238D34B200002B1F /* OpenSSL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		85855BD822537AD300095E9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85855BBB22537AD100095E9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85855BC222537AD100095E9B;
+			remoteInfo = RemoteBolus;
+		};
+		85855BE322537AD300095E9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85855BBB22537AD100095E9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85855BC222537AD100095E9B;
+			remoteInfo = RemoteBolus;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		85E6FFEB238D08AC00002B1F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				85E6FFFD238D34B200002B1F /* OpenSSL.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		85855BC322537AD100095E9B /* RemoteBolus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteBolus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85855BC622537AD100095E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		85855BC822537AD100095E9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85855BCB22537AD100095E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		85855BCD22537AD300095E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		85855BD022537AD300095E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85855BD222537AD300095E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85855BD722537AD300095E9B /* RemoteBolusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemoteBolusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85855BDB22537AD300095E9B /* RemoteBolusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBolusTests.swift; sourceTree = "<group>"; };
+		85855BDD22537AD300095E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85855BE222537AD300095E9B /* RemoteBolusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemoteBolusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85855BE622537AD300095E9B /* RemoteBolusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBolusUITests.swift; sourceTree = "<group>"; };
+		85855BE822537AD300095E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85855BF422537BF600095E9B /* RemoteConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConnectionManager.swift; sourceTree = "<group>"; };
+		85E6FFF5238D0EA400002B1F /* Cert */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Cert; sourceTree = "<group>"; };
+		85E6FFFB238D34A200002B1F /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenSSL.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85855BC022537AD100095E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85E6FFFC238D34A200002B1F /* OpenSSL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BD422537AD300095E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BDF22537AD300095E9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85855BBA22537AD100095E9B = {
+			isa = PBXGroup;
+			children = (
+				85855BC522537AD100095E9B /* RemoteBolus */,
+				85855BDA22537AD300095E9B /* RemoteBolusTests */,
+				85855BE522537AD300095E9B /* RemoteBolusUITests */,
+				85855BC422537AD100095E9B /* Products */,
+				85E6FFD8238C782600002B1F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		85855BC422537AD100095E9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85855BC322537AD100095E9B /* RemoteBolus.app */,
+				85855BD722537AD300095E9B /* RemoteBolusTests.xctest */,
+				85855BE222537AD300095E9B /* RemoteBolusUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85855BC522537AD100095E9B /* RemoteBolus */ = {
+			isa = PBXGroup;
+			children = (
+				85E6FFF5238D0EA400002B1F /* Cert */,
+				85855BC622537AD100095E9B /* AppDelegate.swift */,
+				85855BC822537AD100095E9B /* ViewController.swift */,
+				85855BCA22537AD100095E9B /* Main.storyboard */,
+				85855BCD22537AD300095E9B /* Assets.xcassets */,
+				85855BCF22537AD300095E9B /* LaunchScreen.storyboard */,
+				85855BD222537AD300095E9B /* Info.plist */,
+				85855BF422537BF600095E9B /* RemoteConnectionManager.swift */,
+			);
+			path = RemoteBolus;
+			sourceTree = "<group>";
+		};
+		85855BDA22537AD300095E9B /* RemoteBolusTests */ = {
+			isa = PBXGroup;
+			children = (
+				85855BDB22537AD300095E9B /* RemoteBolusTests.swift */,
+				85855BDD22537AD300095E9B /* Info.plist */,
+			);
+			path = RemoteBolusTests;
+			sourceTree = "<group>";
+		};
+		85855BE522537AD300095E9B /* RemoteBolusUITests */ = {
+			isa = PBXGroup;
+			children = (
+				85855BE622537AD300095E9B /* RemoteBolusUITests.swift */,
+				85855BE822537AD300095E9B /* Info.plist */,
+			);
+			path = RemoteBolusUITests;
+			sourceTree = "<group>";
+		};
+		85E6FFD8238C782600002B1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				85E6FFFB238D34A200002B1F /* OpenSSL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85855BC222537AD100095E9B /* RemoteBolus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85855BEB22537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolus" */;
+			buildPhases = (
+				85855BBF22537AD100095E9B /* Sources */,
+				85855BC022537AD100095E9B /* Frameworks */,
+				85855BC122537AD100095E9B /* Resources */,
+				85E6FFEB238D08AC00002B1F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemoteBolus;
+			productName = RemoteBolus;
+			productReference = 85855BC322537AD100095E9B /* RemoteBolus.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85855BD622537AD300095E9B /* RemoteBolusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85855BEE22537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolusTests" */;
+			buildPhases = (
+				85855BD322537AD300095E9B /* Sources */,
+				85855BD422537AD300095E9B /* Frameworks */,
+				85855BD522537AD300095E9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85855BD922537AD300095E9B /* PBXTargetDependency */,
+			);
+			name = RemoteBolusTests;
+			productName = RemoteBolusTests;
+			productReference = 85855BD722537AD300095E9B /* RemoteBolusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		85855BE122537AD300095E9B /* RemoteBolusUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85855BF122537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolusUITests" */;
+			buildPhases = (
+				85855BDE22537AD300095E9B /* Sources */,
+				85855BDF22537AD300095E9B /* Frameworks */,
+				85855BE022537AD300095E9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85855BE422537AD300095E9B /* PBXTargetDependency */,
+			);
+			name = RemoteBolusUITests;
+			productName = RemoteBolusUITests;
+			productReference = 85855BE222537AD300095E9B /* RemoteBolusUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85855BBB22537AD100095E9B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Vladimir Tchernitski";
+				TargetAttributes = {
+					85855BC222537AD100095E9B = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					85855BD622537AD300095E9B = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = 85855BC222537AD100095E9B;
+					};
+					85855BE122537AD300095E9B = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = 85855BC222537AD100095E9B;
+					};
+				};
+			};
+			buildConfigurationList = 85855BBE22537AD100095E9B /* Build configuration list for PBXProject "RemoteBolus" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 85855BBA22537AD100095E9B;
+			productRefGroup = 85855BC422537AD100095E9B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85855BC222537AD100095E9B /* RemoteBolus */,
+				85855BD622537AD300095E9B /* RemoteBolusTests */,
+				85855BE122537AD300095E9B /* RemoteBolusUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85855BC122537AD100095E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85855BD122537AD300095E9B /* LaunchScreen.storyboard in Resources */,
+				85855BCE22537AD300095E9B /* Assets.xcassets in Resources */,
+				85E6FFF6238D0EA400002B1F /* Cert in Resources */,
+				85855BCC22537AD100095E9B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BD522537AD300095E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BE022537AD300095E9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85855BBF22537AD100095E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85855BC922537AD100095E9B /* ViewController.swift in Sources */,
+				85855BC722537AD100095E9B /* AppDelegate.swift in Sources */,
+				85855BF522537BF600095E9B /* RemoteConnectionManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BD322537AD300095E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85855BDC22537AD300095E9B /* RemoteBolusTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85855BDE22537AD300095E9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85855BE722537AD300095E9B /* RemoteBolusUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85855BD922537AD300095E9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85855BC222537AD100095E9B /* RemoteBolus */;
+			targetProxy = 85855BD822537AD300095E9B /* PBXContainerItemProxy */;
+		};
+		85855BE422537AD300095E9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85855BC222537AD100095E9B /* RemoteBolus */;
+			targetProxy = 85855BE322537AD300095E9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85855BCA22537AD100095E9B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85855BCB22537AD100095E9B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		85855BCF22537AD300095E9B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85855BD022537AD300095E9B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85855BE922537AD300095E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		85855BEA22537AD300095E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		85855BEC22537AD300095E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = RemoteBolus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		85855BED22537AD300095E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = RemoteBolus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolus;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		85855BEF22537AD300095E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = RemoteBolusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemoteBolus.app/RemoteBolus";
+			};
+			name = Debug;
+		};
+		85855BF022537AD300095E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = RemoteBolusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemoteBolus.app/RemoteBolus";
+			};
+			name = Release;
+		};
+		85855BF222537AD300095E9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = RemoteBolusUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RemoteBolus;
+			};
+			name = Debug;
+		};
+		85855BF322537AD300095E9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = RemoteBolusUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RemoteBolus;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85855BBE22537AD100095E9B /* Build configuration list for PBXProject "RemoteBolus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85855BE922537AD300095E9B /* Debug */,
+				85855BEA22537AD300095E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85855BEB22537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85855BEC22537AD300095E9B /* Debug */,
+				85855BED22537AD300095E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85855BEE22537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85855BEF22537AD300095E9B /* Debug */,
+				85855BF022537AD300095E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85855BF122537AD300095E9B /* Build configuration list for PBXNativeTarget "RemoteBolusUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85855BF222537AD300095E9B /* Debug */,
+				85855BF322537AD300095E9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85855BBB22537AD100095E9B /* Project object */;
+}
