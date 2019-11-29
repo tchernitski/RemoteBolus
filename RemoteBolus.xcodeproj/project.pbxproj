@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		851663332391B5C700E68DB7 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851663322391B5C700E68DB7 /* PushManager.swift */; };
 		85855BC722537AD100095E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC622537AD100095E9B /* AppDelegate.swift */; };
 		85855BC922537AD100095E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC822537AD100095E9B /* ViewController.swift */; };
 		85855BCC22537AD100095E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCA22537AD100095E9B /* Main.storyboard */; };
@@ -14,7 +15,6 @@
 		85855BD122537AD300095E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCF22537AD300095E9B /* LaunchScreen.storyboard */; };
 		85855BDC22537AD300095E9B /* RemoteBolusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BDB22537AD300095E9B /* RemoteBolusTests.swift */; };
 		85855BE722537AD300095E9B /* RemoteBolusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BE622537AD300095E9B /* RemoteBolusUITests.swift */; };
-		85855BF522537BF600095E9B /* RemoteConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BF422537BF600095E9B /* RemoteConnectionManager.swift */; };
 		85E6FFF6238D0EA400002B1F /* Cert in Resources */ = {isa = PBXBuildFile; fileRef = 85E6FFF5238D0EA400002B1F /* Cert */; };
 		85E6FFFC238D34A200002B1F /* OpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; };
 		85E6FFFD238D34B200002B1F /* OpenSSL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -51,6 +51,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		851663322391B5C700E68DB7 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		85855BC322537AD100095E9B /* RemoteBolus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteBolus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85855BC622537AD100095E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85855BC822537AD100095E9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		85855BE222537AD300095E9B /* RemoteBolusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemoteBolusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85855BE622537AD300095E9B /* RemoteBolusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBolusUITests.swift; sourceTree = "<group>"; };
 		85855BE822537AD300095E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		85855BF422537BF600095E9B /* RemoteConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConnectionManager.swift; sourceTree = "<group>"; };
 		85E6FFF5238D0EA400002B1F /* Cert */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Cert; sourceTree = "<group>"; };
 		85E6FFFB238D34A200002B1F /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenSSL.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,11 +122,11 @@
 				85E6FFF5238D0EA400002B1F /* Cert */,
 				85855BC622537AD100095E9B /* AppDelegate.swift */,
 				85855BC822537AD100095E9B /* ViewController.swift */,
+				851663322391B5C700E68DB7 /* PushManager.swift */,
 				85855BCA22537AD100095E9B /* Main.storyboard */,
 				85855BCD22537AD300095E9B /* Assets.xcassets */,
 				85855BCF22537AD300095E9B /* LaunchScreen.storyboard */,
 				85855BD222537AD300095E9B /* Info.plist */,
-				85855BF422537BF600095E9B /* RemoteConnectionManager.swift */,
 			);
 			path = RemoteBolus;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 			files = (
 				85855BC922537AD100095E9B /* ViewController.swift in Sources */,
 				85855BC722537AD100095E9B /* AppDelegate.swift in Sources */,
-				85855BF522537BF600095E9B /* RemoteConnectionManager.swift in Sources */,
+				851663332391B5C700E68DB7 /* PushManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
