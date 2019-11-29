@@ -741,7 +741,7 @@ extension DeviceDataManager {
             let messageKey = String(messageTimestamp)
             let aleadyExists = UserDefaults.standard.bool(forKey: messageKey)
             
-            if !aleadyExists && delta < 30 && bolus > 0.0 && bolus < 1.0 {
+            if !aleadyExists && delta < 60 && bolus > 0.0 && bolus <= 1.0 {
                 UserDefaults.standard.set(true, forKey: messageKey)
                 self.enactBolus(units: bolus) { (error) in
                     self.log.info("Valid remote bolus: \(bolus)")

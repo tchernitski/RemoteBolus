@@ -125,14 +125,28 @@ public struct Push {
             
             URLSession(configuration: .ephemeral, delegate: self.authenticator, delegateQueue: .main).dataTask(with: request) { data, response, error in
                 
-                if let error = error {
+                if error != nil {
                     completion?(error)
+                    return
                 }
                 
-                if let data = data {
-                    debugPrint(String(data: data, encoding: .utf8)!)
-                    completion?(nil)
+                guard let httpResponse = response as? HTTPURLResponse,
+                    (200...299).contains(httpResponse.statusCode) else {
+                        
+                        if let data = data,
+                            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                            let reason = json["reason"] as? String
+                        {
+                            completion?(RuntimeError(reason))
+                        }
+                        else {
+                            completion?(RuntimeError("Unknown error"))
+                        }
+                        return
                 }
+                
+                completion?(nil)
+                
             }.resume()
         } catch let error {
             debugPrint(error)
@@ -229,8 +243,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func cancelRequest(_ sender: Any?) {
-        
         inProgressView.isHidden = true
+        status = Status.newBolusAmount
+        action0(nil)
     }
     
     
@@ -240,6 +255,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             amountTextField.isUserInteractionEnabled = true
             amountTextField.becomeFirstResponder()
             actionButton0.setTitle("CANCEL", for: .normal)
+            statusLabel.text = ""
             status = Status.newBolusAmount
         case Status.newBolusAmount: // cancel entering insulin
             amountTextField.resignFirstResponder()
@@ -284,7 +300,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
 
         let now = Date()
-        let expire = Calendar.current.date(byAdding: .second, value: 30, to: now)
+        let expire = Calendar.current.date(byAdding: .second, value: 60, to: now)
         let timeInterval = Int64(expire!.timeIntervalSince1970)
         
         let payload = [
@@ -307,18 +323,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         push.push(deviceId: ViewController.deviceId, payload: payload, expiration: timeInterval) { error in
             
-            if let error = error {
-                debugPrint(error)
+            guard let error = error else {
+                self.statusLabel.text = "Bolus: \(bolus) has been sent!"
+                return
+            }
+            
+            
+            if let error = error as? RuntimeError {
+                self.statusLabel.text = error.localizedDescription
             }
             else {
-                debugPrint("Bolus: \(bolus) has been sent!")
+                self.statusLabel.text = error.localizedDescription
             }
+            
+            self.cancelRequest(nil)
         }
         
         
-        cancelRequest(nil)
-        status = Status.newBolusAmount
-        action0(nil)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -346,37 +367,5 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return flag
     }
-    
-//    @IBAction func amoutChanged(_ sender: UITextField) {
-//        let textFieldText = textField.text
-//
-//        if textFieldText.count
-//    }
-    
-    
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        return true
-//    }
-//
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//
-//    }
-//
-    //
-//
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        print("Editing ended")
-//        textField.backgroundColor = UIColor.whiteColor()
-//
-//    }
-//
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        print(textField.textValue)
-//
-//        textField.isUserInteractionEnabled = false
-//
-//        return true
-//    }
 }
 
