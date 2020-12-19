@@ -8,16 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		851663332391B5C700E68DB7 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851663322391B5C700E68DB7 /* PushManager.swift */; };
+		855E988124FA96610009D8C4 /* AddCarbController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855E988024FA96610009D8C4 /* AddCarbController.swift */; };
+		855E988324FA99A60009D8C4 /* AppStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855E988224FA99A60009D8C4 /* AppStuff.swift */; };
+		857EAA5424FAA8D1008F16FD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857EAA5324FAA8D1008F16FD /* RootViewController.swift */; };
 		85855BC722537AD100095E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC622537AD100095E9B /* AppDelegate.swift */; };
-		85855BC922537AD100095E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC822537AD100095E9B /* ViewController.swift */; };
+		85855BC922537AD100095E9B /* AddBolusController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BC822537AD100095E9B /* AddBolusController.swift */; };
 		85855BCC22537AD100095E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCA22537AD100095E9B /* Main.storyboard */; };
 		85855BCE22537AD300095E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCD22537AD300095E9B /* Assets.xcassets */; };
 		85855BD122537AD300095E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85855BCF22537AD300095E9B /* LaunchScreen.storyboard */; };
 		85855BDC22537AD300095E9B /* RemoteBolusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BDB22537AD300095E9B /* RemoteBolusTests.swift */; };
 		85855BE722537AD300095E9B /* RemoteBolusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85855BE622537AD300095E9B /* RemoteBolusUITests.swift */; };
+		85B758DE258E13FC008CB8D9 /* OpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B758DD258E13FC008CB8D9 /* OpenSSL.framework */; };
+		85B758DF258E140A008CB8D9 /* OpenSSL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85B758DD258E13FC008CB8D9 /* OpenSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		85E6FFF6238D0EA400002B1F /* Cert in Resources */ = {isa = PBXBuildFile; fileRef = 85E6FFF5238D0EA400002B1F /* Cert */; };
-		85E6FFFC238D34A200002B1F /* OpenSSL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; };
-		85E6FFFD238D34B200002B1F /* OpenSSL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 85E6FFFB238D34A200002B1F /* OpenSSL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,13 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		85E6FFEB238D08AC00002B1F /* CopyFiles */ = {
+		85B75890258D59FC008CB8D9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				85E6FFFD238D34B200002B1F /* OpenSSL.framework in CopyFiles */,
+				85B758DF258E140A008CB8D9 /* OpenSSL.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,9 +55,12 @@
 
 /* Begin PBXFileReference section */
 		851663322391B5C700E68DB7 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		855E988024FA96610009D8C4 /* AddCarbController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarbController.swift; sourceTree = "<group>"; };
+		855E988224FA99A60009D8C4 /* AppStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStuff.swift; sourceTree = "<group>"; };
+		857EAA5324FAA8D1008F16FD /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		85855BC322537AD100095E9B /* RemoteBolus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteBolus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85855BC622537AD100095E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		85855BC822537AD100095E9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85855BC822537AD100095E9B /* AddBolusController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBolusController.swift; sourceTree = "<group>"; };
 		85855BCB22537AD100095E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85855BCD22537AD300095E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85855BD022537AD300095E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,8 +71,8 @@
 		85855BE222537AD300095E9B /* RemoteBolusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemoteBolusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85855BE622537AD300095E9B /* RemoteBolusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteBolusUITests.swift; sourceTree = "<group>"; };
 		85855BE822537AD300095E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85B758DD258E13FC008CB8D9 /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenSSL.framework; sourceTree = "<group>"; };
 		85E6FFF5238D0EA400002B1F /* Cert */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Cert; sourceTree = "<group>"; };
-		85E6FFFB238D34A200002B1F /* OpenSSL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenSSL.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85E6FFFC238D34A200002B1F /* OpenSSL.framework in Frameworks */,
+				85B758DE258E13FC008CB8D9 /* OpenSSL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,12 +127,15 @@
 			children = (
 				85E6FFF5238D0EA400002B1F /* Cert */,
 				85855BC622537AD100095E9B /* AppDelegate.swift */,
-				85855BC822537AD100095E9B /* ViewController.swift */,
+				85855BC822537AD100095E9B /* AddBolusController.swift */,
+				855E988224FA99A60009D8C4 /* AppStuff.swift */,
+				855E988024FA96610009D8C4 /* AddCarbController.swift */,
 				851663322391B5C700E68DB7 /* PushManager.swift */,
 				85855BCA22537AD100095E9B /* Main.storyboard */,
 				85855BCD22537AD300095E9B /* Assets.xcassets */,
 				85855BCF22537AD300095E9B /* LaunchScreen.storyboard */,
 				85855BD222537AD300095E9B /* Info.plist */,
+				857EAA5324FAA8D1008F16FD /* RootViewController.swift */,
 			);
 			path = RemoteBolus;
 			sourceTree = "<group>";
@@ -152,7 +161,7 @@
 		85E6FFD8238C782600002B1F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				85E6FFFB238D34A200002B1F /* OpenSSL.framework */,
+				85B758DD258E13FC008CB8D9 /* OpenSSL.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,7 +176,7 @@
 				85855BBF22537AD100095E9B /* Sources */,
 				85855BC022537AD100095E9B /* Frameworks */,
 				85855BC122537AD100095E9B /* Resources */,
-				85E6FFEB238D08AC00002B1F /* CopyFiles */,
+				85B75890258D59FC008CB8D9 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -221,7 +230,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Vladimir Tchernitski";
 				TargetAttributes = {
 					85855BC222537AD100095E9B = {
@@ -290,9 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85855BC922537AD100095E9B /* ViewController.swift in Sources */,
+				85855BC922537AD100095E9B /* AddBolusController.swift in Sources */,
+				855E988124FA96610009D8C4 /* AddCarbController.swift in Sources */,
+				857EAA5424FAA8D1008F16FD /* RootViewController.swift in Sources */,
 				85855BC722537AD100095E9B /* AppDelegate.swift in Sources */,
 				851663332391B5C700E68DB7 /* PushManager.swift in Sources */,
+				855E988324FA99A60009D8C4 /* AppStuff.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +385,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -434,6 +447,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -470,20 +484,25 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RemoteBolus/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OpenSSL.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -499,15 +518,19 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RemoteBolus/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OpenSSL.framework",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = T1D.RemoteBolus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -12,15 +12,15 @@ import LoopKitUI
 import LoopCore
 import LoopTestingKit
 import UserNotifications
-import Foundation
 
 final class DeviceDataManager {
 
     private let queue = DispatchQueue(label: "com.loopkit.DeviceManagerQueue", qos: .utility)
+    
+    fileprivate let dosingQueue: DispatchQueue = DispatchQueue(label: "com.loopkit.DeviceManagerDosingQueue", qos: .utility)
+
 
     private let log = DiagnosticLogger.shared.forCategory("DeviceManager")
-    
-    private var lastGlucose:NewGlucoseSample?
 
     /// Remember the launch date of the app for diagnostic reporting
     private let launchDate = Date()
@@ -38,6 +38,8 @@ final class DeviceDataManager {
 
     /// The last time a BLE heartbeat was received and acted upon.
     private var lastBLEDrivenUpdate = Date.distantPast
+    
+    private var deviceLog: PersistentDeviceLog
 
     // MARK: - CGM
 
@@ -89,6 +91,11 @@ final class DeviceDataManager {
 
     init() {
         pluginManager = PluginManager()
+        
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let deviceLogDirectory = documentsDirectory.appendingPathComponent("DeviceLog")
+        deviceLog = PersistentDeviceLog(storageFile: deviceLogDirectory.appendingPathComponent("Storage.sqlite"))
 
         if let pumpManagerRawValue = UserDefaults.appGroup?.pumpManagerRawValue {
             pumpManager = pumpManagerFromRawValue(pumpManagerRawValue)
@@ -123,7 +130,6 @@ final class DeviceDataManager {
 
         setupPump()
         setupCGM()
-        onIdleSpikeUpdate();
     }
 
     var isCGMManagerValidPumpManager: Bool {
@@ -164,12 +170,12 @@ final class DeviceDataManager {
         switch result {
         case .newData(let values):
             log.default("CGMManager:\(type(of: manager)) did update with \(values.count) values")
-            
+                        
             loopManager.addGlucose(values) { result in
                 if manager.shouldSyncToRemoteService {
                     switch result {
                     case .success(let values):
-                        self.nightscoutDataManager.uploadGlucose(values, sensorState: manager.sensorState)
+                        self.nightscoutDataManager.uploadGlucose(values, sensorState: manager.sensorState, fromDevice: manager.device)
                     case .failure:
                         break
                     }
@@ -193,7 +199,52 @@ final class DeviceDataManager {
         updatePumpManagerBLEHeartbeatPreference()
     }
 
-
+    func generateDiagnosticReport(_ completion: @escaping (_ report: String) -> Void) {
+        self.loopManager.generateDiagnosticReport { (loopReport) in
+            self.deviceLog.getLogEntries(startDate: Date() - .hours(48)) { (result) in
+                let deviceLogReport: String
+                switch result {
+                case .failure(let error):
+                    deviceLogReport = "Error fetching entries: \(error)"
+                case .success(let entries):
+                    deviceLogReport = entries.map { "* \($0.timestamp) \($0.managerIdentifier) \($0.deviceIdentifier ?? "") \($0.type) \($0.message)" }.joined(separator: "\n")
+                }
+                
+                let report = [
+                    "## LoopVersion",
+                    "* Version: \(Bundle.main.localizedNameAndVersion)",
+                    "* gitRevision: \(Bundle.main.gitRevision ?? "N/A")",
+                    "* gitBranch: \(Bundle.main.gitBranch ?? "N/A")",
+                    "* sourceRoot: \(Bundle.main.sourceRoot ?? "N/A")",
+                    "* buildDateString: \(Bundle.main.buildDateString ?? "N/A")",
+                    "* xcodeVersion: \(Bundle.main.xcodeVersion ?? "N/A")",
+                    "",
+                    "## FeatureFlags",
+                    "\(FeatureFlags)",
+                    "",
+                    "## DeviceDataManager",
+                    "* launchDate: \(self.launchDate)",
+                    "* lastError: \(String(describing: self.lastError))",
+                    "* lastBLEDrivenUpdate: \(self.lastBLEDrivenUpdate)",
+                    "",
+                    self.cgmManager != nil ? String(reflecting: self.cgmManager!) : "cgmManager: nil",
+                    "",
+                    self.pumpManager != nil ? String(reflecting: self.pumpManager!) : "pumpManager: nil",
+                    "",
+                    "## Device Communication Log",
+                    deviceLogReport,
+                    "",
+                    String(reflecting: self.watchManager!),
+                    "",
+                    String(reflecting: self.statusExtensionManager!),
+                    "",
+                    loopReport,
+                ].joined(separator: "\n")
+                
+                completion(report)
+            }
+        }
+    }
 }
 
 private extension DeviceDataManager {
@@ -278,6 +329,7 @@ extension DeviceDataManager: RemoteDataManagerDelegate {
 
 // MARK: - DeviceManagerDelegate
 extension DeviceDataManager: DeviceManagerDelegate {
+
     func scheduleNotification(for manager: DeviceManager,
                               identifier: String,
                               content: UNNotificationContent,
@@ -293,6 +345,10 @@ extension DeviceDataManager: DeviceManagerDelegate {
 
     func clearNotification(for manager: DeviceManager, identifier: String) {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
+    }
+
+    func deviceManager(_ manager: DeviceManager, logEventForDeviceIdentifier deviceIdentifier: String?, type: DeviceLogEntryType, message: String, completion: ((Error?) -> Void)?) {
+        deviceLog.log(managerIdentifier: Swift.type(of: manager).managerIdentifier, deviceIdentifier: deviceIdentifier, type: type, message: message, completion: completion)
     }
 }
 
@@ -366,15 +422,30 @@ extension DeviceDataManager: PumpManagerDelegate {
         }
         lastBLEDrivenUpdate = Date()
 
-        cgmManager?.fetchNewDataIfNeeded { (result) in
-            if case .newData = result {
-                AnalyticsManager.shared.didFetchNewCGMData()
-            }
-
-            if let manager = self.cgmManager {
-                self.queue.async {
-                    self.processCGMResult(manager, result: result)
+        refreshCGM()
+    }
+    
+    private func refreshCGM(_ completion: (() -> Void)? = nil) {
+        if let cgmManager = cgmManager {
+            cgmManager.fetchNewDataIfNeeded { (result) in
+                if case .newData = result {
+                    AnalyticsManager.shared.didFetchNewCGMData()
                 }
+
+                self.queue.async {
+                    self.processCGMResult(cgmManager, result: result)
+                    completion?()
+                }
+            }
+        } else {
+            completion?()
+        }
+    }
+    
+    func refreshDeviceData() {
+        refreshCGM() {
+            self.queue.async {
+                self.pumpManager?.assertCurrentPumpData()
             }
         }
     }
@@ -509,56 +580,6 @@ extension DeviceDataManager: PumpManagerDelegate {
         dispatchPrecondition(condition: .onQueue(queue))
         return loopManager.doseStore.pumpEventQueryAfterDate
     }
-    
-    @objc func onIdleSpikeUpdate() {
-        log.default("PumpManager:\(type(of: pumpManager)) idle spike update")
-        
-        lastBLEDrivenUpdate = Date()
-        
-        self.cgmManager?.fetchNewDataIfNeeded { (result) in
-            
-            if case .newData(let glucoseList) = result {
-                AnalyticsManager.shared.didFetchNewCGMData()
-                self.lastGlucose = glucoseList.first
-            } else if (self.lastGlucose == nil) {
-                self.lastGlucose = self.cgmManager?.sensorState as? NewGlucoseSample
-            }
-            
-            if let manager = self.cgmManager {
-                self.queue.async {
-                    self.cgmManager(manager, didUpdateWith: result)
-                }
-                self.queue.async {
-                    self.setNextTimer()
-                }
-            }
-        }
-        
-        
-    }
-    
-    func setNextTimer() {
-        dispatchPrecondition(condition: .onQueue(queue))
-        var intervalToNextUpdate = TimeInterval(minutes: 1.0)
-        var dateFromLastUpdate = self.lastGlucose?.date
-        if (dateFromLastUpdate != nil) {
-            self.log.default("Last spike update \(dateFromLastUpdate!.timeIntervalSinceNow.minutes) minutes ago")
-            dateFromLastUpdate = dateFromLastUpdate!.addingTimeInterval(TimeInterval(minutes: 5.25))
-            intervalToNextUpdate = dateFromLastUpdate!.timeIntervalSinceNow
-            self.log.default("Next spike update in \((intervalToNextUpdate/60).rounded(.towardZero)) minutes and \(intervalToNextUpdate.truncatingRemainder(dividingBy: 60.0)) seconds")
-        }
-        if (intervalToNextUpdate < 0) {
-            if (intervalToNextUpdate < .minutes(-5)) {
-                intervalToNextUpdate = TimeInterval(minutes:5.0)
-            } else {
-                intervalToNextUpdate = TimeInterval(minutes:1.0)
-            }
-        }
-        DispatchQueue.main.async {
-            // timer needs a runloop?
-            Timer.scheduledTimer(timeInterval: intervalToNextUpdate, target: self, selector: #selector(self.onIdleSpikeUpdate), userInfo: nil, repeats: false)
-        }
-    }
 }
 
 // MARK: - DoseStoreDelegate
@@ -643,62 +664,71 @@ extension DeviceDataManager: LoopDataManagerDelegate {
         guard let pumpManager = pumpManager else {
             return units
         }
-
-        return pumpManager.roundToSupportedBolusVolume(units: units)
+        
+        let rounded = ([0.0] + pumpManager.supportedBolusVolumes).enumerated().min( by: { abs($0.1 - units) < abs($1.1 - units) } )!.1
+        self.log.default("Rounded \(units) to \(rounded)")
+        
+        return rounded
     }
 
     func loopDataManager(
         _ manager: LoopDataManager,
-        didRecommendBasalChange basal: (recommendation: TempBasalRecommendation, date: Date),
-        completion: @escaping (_ result: Result<DoseEntry>) -> Void
+        didRecommend automaticDose: (recommendation: AutomaticDoseRecommendation, date: Date),
+        completion: @escaping (_ error: Error?) -> Void
     ) {
         guard let pumpManager = pumpManager else {
-            completion(.failure(LoopError.configurationError(.pumpManager)))
+            completion(LoopError.configurationError(.pumpManager))
             return
         }
+        
+        dosingQueue.async {
+            let doseDispatchGroup = DispatchGroup()
+            
+            var tempBasalError: Error? = nil
+            var bolusError: Error? = nil
+            
+            if let basalAdjustment = automaticDose.recommendation.basalAdjustment {
+                self.log.default("LoopManager did recommend basal change")
+                
+                doseDispatchGroup.enter()
+                pumpManager.enactTempBasal(unitsPerHour: basalAdjustment.unitsPerHour, for: basalAdjustment.duration, completion: { result in
+                    switch result {
+                    case .failure(let error):
+                        tempBasalError = error
+                    default:
+                        break
+                    }
+                    doseDispatchGroup.leave()
+                })
+            }
+            
+            doseDispatchGroup.wait()
+            
+            guard tempBasalError == nil else {
+                completion(tempBasalError)
+                return
+            }
 
-        log.default("LoopManager did recommend basal change")
-
-        pumpManager.enactTempBasal(
-            unitsPerHour: basal.recommendation.unitsPerHour,
-            for: basal.recommendation.duration,
-            completion: { result in
-                switch result {
-                case .success(let doseEntry):
-                    completion(.success(doseEntry))
-                case .failure(let error):
-                    completion(.failure(error))
+            if automaticDose.recommendation.bolusUnits > 0 {
+                self.log.default("LoopManager did recommend bolus dose")
+                doseDispatchGroup.enter()
+                pumpManager.enactBolus(units: automaticDose.recommendation.bolusUnits, at: Date(), willRequest: { (dose) in
+                    self.log.default("PumpManager willRequest bolus")
+                }) { (result) in
+                    switch result {
+                    case .failure(let error):
+                        bolusError = error
+                    default:
+                        self.log.default("PumpManager issued bolus command")
+                        break
+                    }
+                    doseDispatchGroup.leave()
                 }
             }
-        )
-    }
-}
-
-
-// MARK: - CustomDebugStringConvertible
-extension DeviceDataManager: CustomDebugStringConvertible {
-    var debugDescription: String {
-        return [
-            Bundle.main.localizedNameAndVersion,
-            "* gitRevision: \(Bundle.main.gitRevision ?? "N/A")",
-            "* gitBranch: \(Bundle.main.gitBranch ?? "N/A")",
-            "* sourceRoot: \(Bundle.main.sourceRoot ?? "N/A")",
-            "* buildDateString: \(Bundle.main.buildDateString ?? "N/A")",
-            "* xcodeVersion: \(Bundle.main.xcodeVersion ?? "N/A")",
-            "",
-            "## DeviceDataManager",
-            "* launchDate: \(launchDate)",
-            "* lastError: \(String(describing: lastError))",
-            "* lastBLEDrivenUpdate: \(lastBLEDrivenUpdate)",
-            "",
-            cgmManager != nil ? String(reflecting: cgmManager!) : "cgmManager: nil",
-            "",
-            pumpManager != nil ? String(reflecting: pumpManager!) : "pumpManager: nil",
-            "",
-            String(reflecting: watchManager!),
-            "",
-            String(reflecting: statusExtensionManager!),
-        ].joined(separator: "\n")
+            
+            doseDispatchGroup.wait()
+            completion(bolusError)
+        }
     }
 }
 
@@ -709,8 +739,6 @@ extension Notification.Name {
 
 // MARK: - Remote Notification Handling
 extension DeviceDataManager {
-    
-    
     func handleRemoteNotification(_ notification: [String: AnyObject]) {
         
         if let command = RemoteCommand(notification: notification, allowedPresets: loopManager.settings.overridePresets) {
@@ -723,12 +751,8 @@ extension DeviceDataManager {
                 loopManager.settings.scheduleOverride = nil
             }
         } else {
-            
             // handle remote bolus
-            guard let bolus = notification["bolus"] as? Double else {
-                log.info("Unhandled remote notification: \(notification)")
-                return
-            }
+            
             guard let messageTimestamp = notification["timestamp"] as? Int64 else {
                 log.info("Unhandled remote notification: \(notification)")
                 return
@@ -741,16 +765,61 @@ extension DeviceDataManager {
             let messageKey = String(messageTimestamp)
             let aleadyExists = UserDefaults.standard.bool(forKey: messageKey)
             
-            if !aleadyExists && delta < 60 && bolus > 0.0 && bolus <= 1.0 {
+            
+            if !aleadyExists && delta < 60 {
                 UserDefaults.standard.set(true, forKey: messageKey)
-                self.enactBolus(units: bolus) { (error) in
-                    self.log.info("Valid remote bolus: \(bolus)")
+                
+                if let bolus: Double = notification["bolus"] as? Double {
+                    self.enactBolus(units: bolus) { (error) in
+                        self.log.info("Valid remote bolus: \(bolus)")
+                    }
+                }
+                else if let carbs: Double = notification["carbs"] as? Double {
+                
+                    let carbEntry = NewCarbEntry(quantity: HKQuantity(unit: .gram(), doubleValue: carbs), startDate: Date(), foodType: nil, absorptionTime: TimeInterval(hours: 3), syncIdentifier: UUID().uuidString)
+                    
+                    loopManager.addCarbEntryAndRecommendBolus(carbEntry) { (result) in
+                        switch result {
+                        case .success:
+                            self.log.info("Valid remote carbs entry: \(carbs)")
+                        case .failure(let error):
+                            self.log.info("Invalid remote carbs entry: \(notification) \(error)")
+                        }
+                    }
+               }
+                else if let loopClosed: Bool = notification["loop"] as? Bool {
+                    loopManager.settings.dosingEnabled = loopClosed
+                    self.log.info("Valid remote loop status change: \(loopClosed)")
+                }
+                else if let suspendDelivery: Bool = notification["suspend"] as? Bool {
+                    if suspendDelivery {
+                        self.pumpManager?.suspendDelivery { (error) in
+                            if let error = error {
+                                self.log.info("Error remote suspend delivery status change: \(error)")
+                            }
+                            else {
+                                self.log.info("Valid remote suspend delivery status change")
+                            }
+                        }
+                    }
+                    else {
+                        self.pumpManager?.resumeDelivery { (error) in
+                            if let error = error {
+                                self.log.info("Error remote resume delivery status change: \(error)")
+                            }
+                            else {
+                                self.log.info("Valid remote resume delivery status change")
+                            }
+                        }
+                    }
+                }
+                else {
+                    log.info("Unhandled remote notification: \(notification)")
                 }
             }
             else {
-                self.log.info("Outdated remote bolus: \(notification), delta: \(delta)")
+                self.log.info("Outdated remote action: \(notification), delta: \(delta)")
             }
-            ///
         }
     }
 }
